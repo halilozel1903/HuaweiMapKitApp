@@ -82,7 +82,7 @@ Now we can add map to our layout file (`activity_main.xml`).
 ```
 <br>
 
-We make map settings in the MainActivity` class. We add a static location information. We add a marker to the map.
+We make map settings in the `MainActivity` class. We add a static location information. We add a marker to the map.
 
 ```kotlin
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -151,6 +151,7 @@ We have done all the necessary actions. Congratulations!!! 🥳 You have develop
 - https://developer.huawei.com/consumer/en/hms/huawei-MapKit/
 - https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides/android-sdk-introduction-0000001050158633
 - https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/hms-map-v4-faq
+- https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides/android-sdk-version-change-history-0000001050156688
 
 <br>
 
