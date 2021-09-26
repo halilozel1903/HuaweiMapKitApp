@@ -12,57 +12,57 @@ Map drawing: Adds location markers, map layers, overlays, and various shapes. <b
 
 ## How to use Huawei Map Kit 🧐
 
-**First, you need to register a Huawei Developer account. You can register it for free from the link below.**
+First, you need to register a Huawei Developer account. You can register it for free from the link below.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiDeveloperAccount.png)<br><br>
 
 https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html
 
-**After opening the developer account, we will create a project**
+After opening the developer account, we will create a project
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiProject.png)<br><br>
 
-**And open an application in the project.**
+And open an application in the project.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiApp.png)<br><br>
 
-**We need to adjust the settings of the application. Since it is a sample project, I share all the information with you.** 
+We need to adjust the settings of the application. Since it is a sample project, I share all the information with you.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiSettings.png)<br><br>
 
-**We need to produce SHA-256 certificate fingerprints. We click on the Gradle area on the right in Android Studio.**
+We need to produce SHA-256 certificate fingerprints. We click on the Gradle area on the right in Android Studio.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/gradleSign.png)<br><br>
 
-**Clicking the signingReport button under Tasks, we generate sha 256 code. We add it to the relevant field in the project settings.**
+Clicking the signingReport button under Tasks, we generate sha 256 code. We add it to the relevant field in the project settings.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/sha256.png)<br><br>
 
-**We need to activate MapKit from the Manage API section.**
+We need to activate MapKit from the Manage API section.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKit.png)<br><br>
 
-**We download the agconnect-services.json file. Then we add it to the app folder of our project.**
+We download the `agconnect-services.json` file. Then we add it to the app folder of our project.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/agconnect.png)<br><br>
 
-**We define the necessary permissions in the Android Manifest file.**
+We define the necessary permissions in the `AndroidManifest.xml` file.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/manifest.png)<br><br>
 
-**In the Build Gradle field, we add the necessary codes for Huawei Map Kit.**
+In the `build.gradle(HuaweiMapKitApp)` field, we add the necessary codes for Huawei Map Kit.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/buildGradle.png)<br><br>
 
-**We add the plugin in Build Gradle.**
+We add the plugin in `build.gradle(:app)`
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/plugin.png)<br><br>
 
-**We add the Map Kit dependency in Build Gradle.**
+**We add the Map Kit dependency in `build.gradle(:app)`
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/dependencies.png)<br><br>
 
-**Now we can add map to our layout file.**
+Now we can add map to our layout file (`activity_main.xml`).
 
 ```kotlin
 <?xml version="1.0" encoding="utf-8"?>
@@ -82,7 +82,7 @@ https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html
 ```
 <br>
 
-**We make map settings in the MainActivity class. We add a static location information. We add a marker to the map.**
+We make map settings in the MainActivity` class. We add a static location information. We add a marker to the map.
 
 ```kotlin
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -95,6 +95,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // View Binding Settings
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -103,8 +104,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_BUNDLE_KEY)
         }
-
-        //View Binding
         binding.huaweiMapView.onCreate(mapViewBundle)
         binding.huaweiMapView.getMapAsync(this)
     }
@@ -113,18 +112,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     // if the map is ready
     override fun onMapReady(map: HuaweiMap) {
 
-        //mapping
+        // mapping
         huaweiMap = map
 
-        //marker add
+        // marker add
         marker = huaweiMap.addMarker(
             MarkerOptions()
-                .icon(BitmapDescriptorFactory.defaultMarker()) //default marker
+                .icon(BitmapDescriptorFactory.defaultMarker()) // default marker
                 .title("Huawei Turkey") // maker title
-                .position(LatLng(41.031261, 29.117277)) //marker position
+                .position(LatLng(41.031261, 29.117277)) // marker position
 
         )
-        //camera position settings
+        // camera position settings
         cameraPosition = CameraPosition.builder()
             .target(LatLng(41.031261, 29.117277))
             .zoom(10f)
@@ -134,13 +133,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         huaweiMap.moveCamera(cameraUpdate)
 
     }
-
+    // constant
     companion object {
         private const val MAP_BUNDLE_KEY = "MapBundleKey"
     }
 }
 ```
-**We have done all the necessary actions. Congratulations!!! You have developed the first Huawei Maps application.**
+We have done all the necessary actions. Congratulations!!! 🥳 You have developed the first Huawei Maps application.
 
 ## Screens 📱
 
