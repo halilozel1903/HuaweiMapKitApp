@@ -2,33 +2,33 @@ package com.halil.ozel.huaweimapkitapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.halil.ozel.huaweimapkitapp.databinding.ActivityMainBinding
 import com.huawei.hms.maps.*
 import com.huawei.hms.maps.model.*
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var huaweiMap: HuaweiMap
-    private lateinit var mapView: MapView
     private lateinit var marker: Marker
     private lateinit var cameraUpdate: CameraUpdate
     private lateinit var cameraPosition: CameraPosition
-    private val MAP_BUNDLE_KEY = "MapBundleKey"
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        //Kotlin synthetic
-        mapView = huaweiMapView
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         var mapViewBundle: Bundle? = null
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_BUNDLE_KEY)
         }
-        mapView.onCreate(mapViewBundle)
-        mapView.getMapAsync(this)
+
+        //View Binding
+        binding.huaweiMapView.onCreate(mapViewBundle)
+        binding.huaweiMapView.getMapAsync(this)
     }
 
 
@@ -55,5 +55,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
         huaweiMap.moveCamera(cameraUpdate)
 
+    }
+
+    companion object {
+        private const val MAP_BUNDLE_KEY = "MapBundleKey"
     }
 }
