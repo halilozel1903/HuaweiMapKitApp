@@ -1,10 +1,8 @@
-# Huawei Map Kit App
+# Huawei Map Kit App 🗺 📍 🧭
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huawei.png)
 
-An Android application related to Huawei Map Kit.
-
-## What is Huawei Map Kit?
+## What is Huawei Map Kit ⁉️
 Map Kit is an SDK for map development. It covers map data of more than 200 countries and regions, and supports hundreds of languages. With this SDK, you can easily integrate map-based functions into your apps.
 
 HUAWEI Map Kit uses the WGS 84 GPS coordinate system, which meets most map development requirements outside China, including:
@@ -12,7 +10,7 @@ Map display: Displays buildings, roads, water systems, and Points of Interest (P
 Map interaction: Controls the interaction gestures and buttons on the map.
 Map drawing: Adds location markers, map layers, overlays, and various shapes. <br>
 
-## How to use Huawei Map Kit?
+## How to use Huawei Map Kit 🧐
 
 **First, you need to register a Huawei Developer account. You can register it for free from the link below.**
 
@@ -90,25 +88,25 @@ https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var huaweiMap: HuaweiMap
-    private lateinit var mapView: MapView
     private lateinit var marker: Marker
     private lateinit var cameraUpdate: CameraUpdate
     private lateinit var cameraPosition: CameraPosition
-    private val MAP_BUNDLE_KEY = "MapBundleKey"
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        //Kotlin synthetic
-        mapView = huaweiMapView
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         var mapViewBundle: Bundle? = null
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_BUNDLE_KEY)
         }
-        mapView.onCreate(mapViewBundle)
-        mapView.getMapAsync(this)
+
+        //View Binding
+        binding.huaweiMapView.onCreate(mapViewBundle)
+        binding.huaweiMapView.getMapAsync(this)
     }
 
 
@@ -136,26 +134,32 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         huaweiMap.moveCamera(cameraUpdate)
 
     }
+
+    companion object {
+        private const val MAP_BUNDLE_KEY = "MapBundleKey"
+    }
 }
 ```
 **We have done all the necessary actions. Congratulations!!! You have developed the first Huawei Maps application.**
 
-<img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen1.png" width="300" /><img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen2.png" width="300" />
+## Screens 📱
+
+<img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen1.png" width="300" /> <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen2.png" width="300" />
 
 <br>
 
-## Resources
+## Resources 📚
 - https://developer.huawei.com/consumer/en/hms/huawei-MapKit/
 - https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides/android-sdk-introduction-0000001050158633
 - https://developer.huawei.com/consumer/en/doc/development/HMS-Guides/hms-map-v4-faq
 
 <br>
 
-## License
+## License ℹ️
 ```
 MIT License
 
-Copyright (c) 2020 Halil Ozel
+Copyright (c) 2021 Halil OZEL
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
