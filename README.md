@@ -139,9 +139,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 }
 ```
-- Have done all the necessary actions. Congratulations!!! 🥳 You have developed the first Huawei Maps application.
+- Have done all the necessary actions. Congratulations! 🥳 You have developed the first Huawei Maps application.
 
-## Screens 📱
+## Screenshots 📱
 
 <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen1.png" width="300" /> <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen2.png" width="300" />
 
