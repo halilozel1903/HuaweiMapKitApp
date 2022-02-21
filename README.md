@@ -82,7 +82,7 @@ https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html
 ```
 <br>
 
-- Make map settings in the `MainActivity` class. We add a static location information. We add a marker to the map.
+- Make map settings in the `MainActivity` class. Add a static location information and marker to the map.
 
 ```kotlin
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -145,7 +145,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
 <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen1.png" width="300" /> <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen2.png" width="300" />
 
-<br>
 
 ## Resources 📚
 - https://developer.huawei.com/consumer/en/hms/huawei-MapKit/
