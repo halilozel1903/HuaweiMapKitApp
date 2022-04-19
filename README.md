@@ -12,57 +12,57 @@ Map drawing: Adds location markers, map layers, overlays, and various shapes. <b
 
 ## How to use Huawei Map Kit 🧐
 
-First, you need to register a Huawei Developer account. You can register it for free from the link below.
+- First, you need to register a Huawei Developer account. You can register it for free from the link below.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiDeveloperAccount.png)<br><br>
 
 https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html
 
-After opening the developer account, we will create a project
+- After opening the developer account, we will create a project
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiProject.png)<br><br>
 
-And open an application in the project.
+- And open an application in the project.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiApp.png)<br><br>
 
-We need to adjust the settings of the application. Since it is a sample project, I share all the information with you.
+- Need to adjust the settings of the application. Since it is a sample project, I share all the information with you.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiSettings.png)<br><br>
 
-We need to produce SHA-256 certificate fingerprints. We click on the Gradle area on the right in Android Studio.
+- Need to produce SHA-256 certificate fingerprints. We click on the Gradle area on the right in Android Studio.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/gradleSign.png)<br><br>
 
-Clicking the signingReport button under Tasks, we generate sha 256 code. We add it to the relevant field in the project settings.
+- Clicking the signingReport button under Tasks, we generate sha 256 code. We add it to the relevant field in the project settings.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/sha256.png)<br><br>
 
-We need to activate MapKit from the Manage API section.
+- Need to activate MapKit from the Manage API section.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKit.png)<br><br>
 
-We download the `agconnect-services.json` file. Then we add it to the app folder of our project.
+- Download the `agconnect-services.json` file. Then we add it to the app folder of our project.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/agconnect.png)<br><br>
 
-We define the necessary permissions in the `AndroidManifest.xml` file.
+- Define the necessary permissions in the `AndroidManifest.xml` file.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/manifest.png)<br><br>
 
-In the `build.gradle(HuaweiMapKitApp)` field, we add the necessary codes for Huawei Map Kit.
+- In the `build.gradle(HuaweiMapKitApp)` field, we add the necessary codes for Huawei Map Kit.
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/buildGradle.png)<br><br>
 
-We add the plugin in `build.gradle(:app)`
+- Add the plugin in `build.gradle(:app)`
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/plugin.png)<br><br>
 
-**We add the Map Kit dependency in `build.gradle(:app)`
+- Add the Map Kit dependency in `build.gradle(:app)`
 
 ![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/dependencies.png)<br><br>
 
-Now we can add map to our layout file (`activity_main.xml`).
+- Now can add map to our layout file (`activity_main.xml`).
 
 ```kotlin
 <?xml version="1.0" encoding="utf-8"?>
@@ -82,7 +82,7 @@ Now we can add map to our layout file (`activity_main.xml`).
 ```
 <br>
 
-We make map settings in the `MainActivity` class. We add a static location information. We add a marker to the map.
+- Make map settings in the `MainActivity` class. Add a static location information and marker to the map.
 
 ```kotlin
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -139,13 +139,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 }
 ```
-We have done all the necessary actions. Congratulations!!! 🥳 You have developed the first Huawei Maps application.
+- Have done all the necessary actions. Congratulations! 🥳 You have developed the first Huawei Maps application.
 
-## Screens 📱
+## Screenshots 📱
 
 <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen1.png" width="300" /> <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen2.png" width="300" />
 
-<br>
 
 ## Resources 📚
 - https://developer.huawei.com/consumer/en/hms/huawei-MapKit/
@@ -159,7 +158,7 @@ We have done all the necessary actions. Congratulations!!! 🥳 You have develop
 ```
 MIT License
 
-Copyright (c) 2021 Halil OZEL
+Copyright (c) 2022 Halil OZEL
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
