@@ -55,7 +55,7 @@ https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html
 <uses-permission android:name="com.huawei.appmarket.service.commondata.permission.GET_COMMON_DATA" />
 <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 ``` 
-<br><br>
+<br>
 
 - In the `build.gradle(HuaweiMapKitApp)` field, we add the necessary codes for Huawei Map Kit.
 
@@ -88,7 +88,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 ```
-<br><br>
+<br>
 
 - Add the plugin in `build.gradle(:app)`
 
@@ -99,7 +99,7 @@ plugins {
     id 'com.huawei.agconnect'
 }
 ```
-<br><br>
+<br>
 
 - Add the Map Kit dependency in `build.gradle(:app)`
 
@@ -112,7 +112,7 @@ dependencies {
     implementation 'com.huawei.hms:maps:6.4.1.300'
 }
 ```
-<br><br>
+<br>
 
 - Now can add map to our layout file (`activity_main.xml`).
 
