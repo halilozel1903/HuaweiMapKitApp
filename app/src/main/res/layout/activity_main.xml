@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.huawei.hms.maps.MapView
-        xmlns:map="http://schemas.android.com/apk/res-auto"
+    <com.huawei.hms.maps.MapView xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/huaweiMapView"
-        map:uiCompass="true"
-        map:uiZoomControls="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        map:uiCompass="true"
+        map:uiZoomControls="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
