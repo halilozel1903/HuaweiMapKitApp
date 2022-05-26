@@ -48,19 +48,71 @@ https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html
 
 - Define the necessary permissions in the `AndroidManifest.xml` file.
 
-![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/manifest.png)<br><br>
+```kotlin
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+<uses-permission android:name="com.huawei.appmarket.service.commondata.permission.GET_COMMON_DATA" />
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+``` 
+<br><br>
 
 - In the `build.gradle(HuaweiMapKitApp)` field, we add the necessary codes for Huawei Map Kit.
 
-![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/buildGradle.png)<br><br>
+```kotlin
+buildscript {
+    ext.kotlin_version = "1.6.21"
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://developer.huawei.com/repo/' }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.huawei.agconnect:agcp:1.6.0.300'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://developer.huawei.com/repo/'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+```
+<br><br>
 
 - Add the plugin in `build.gradle(:app)`
 
-![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/plugin.png)<br><br>
+```kotlin
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'com.huawei.agconnect'
+}
+```
+<br><br>
 
 - Add the Map Kit dependency in `build.gradle(:app)`
 
-![Screenshot](https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/dependencies.png)<br><br>
+```kotlin
+dependencies {
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.huawei.hms:maps:6.4.1.300'
+}
+```
+<br><br>
 
 - Now can add map to our layout file (`activity_main.xml`).
 
