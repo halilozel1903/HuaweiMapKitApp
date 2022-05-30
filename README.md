@@ -134,7 +134,7 @@ dependencies {
 ```
 <br>
 
-- Make map settings in the `MainActivity` class. Add a static location information and marker to the map.
+- Make map settings in the `MainActivity.kt`. Add a static location information and marker to the map.
 
 ```kotlin
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
