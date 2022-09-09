@@ -35,18 +35,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     // if the map is ready
     override fun onMapReady(map: HuaweiMap) {
 
-        //mapping
+        // Mapping
         huaweiMap = map
 
-        //marker add
+        // Marker add
         marker = huaweiMap.addMarker(
             MarkerOptions()
                 .icon(BitmapDescriptorFactory.defaultMarker()) //default marker
-                .title("Huawei Turkey") // maker title
+                .title(getString(R.string.location_name)) // maker title
                 .position(LatLng(41.031261, 29.117277)) //marker position
 
         )
-        //camera position settings
+        // Camera position settings
         cameraPosition = CameraPosition.builder()
             .target(LatLng(41.031261, 29.117277))
             .zoom(10f)
