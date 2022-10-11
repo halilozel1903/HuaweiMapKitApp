@@ -26,9 +26,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             mapViewBundle = savedInstanceState.getBundle(MAP_BUNDLE_KEY)
         }
 
-        //View Binding
-        binding.huaweiMapView.onCreate(mapViewBundle)
-        binding.huaweiMapView.getMapAsync(this)
+        // View Binding
+        binding.huaweiMapView.apply {
+            onCreate(mapViewBundle)
+            getMapAsync(this@MainActivity)
+        }
     }
 
 
