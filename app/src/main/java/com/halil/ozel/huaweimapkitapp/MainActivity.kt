@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    // if the map is ready
+    // If the map is ready
     override fun onMapReady(map: HuaweiMap) {
 
         // Mapping
@@ -43,17 +43,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         // Marker add
         marker = huaweiMap.addMarker(
             MarkerOptions()
-                .icon(BitmapDescriptorFactory.defaultMarker()) //default marker
-                .title(getString(R.string.location_name)) // maker title
-                .position(LatLng(41.031261, 29.117277)) //marker position
+                .icon(BitmapDescriptorFactory.defaultMarker()) // Default marker icon
+                .title(getString(R.string.location_name)) // Marker title
+                .position(LatLng(LATITUDE, LONGITUDE)) // Marker position
 
         )
         // Camera position settings
         cameraPosition = CameraPosition.builder()
-            .target(LatLng(41.031261, 29.117277))
-            .zoom(10f)
-            .bearing(2.0f)
-            .tilt(2.5f).build()
+            .target(LatLng(LATITUDE, LONGITUDE))
+            .zoom(ZOOM)
+            .bearing(BEARING)
+            .tilt(TILT).build()
         cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
         huaweiMap.moveCamera(cameraUpdate)
 
@@ -61,5 +61,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     companion object {
         private const val MAP_BUNDLE_KEY = "MapBundleKey"
+        private const val LATITUDE: Double = 41.031261
+        private const val LONGITUDE: Double = 29.117277
+        private const val ZOOM: Float = 10f
+        private const val BEARING: Float = 2.0f
+        private const val TILT: Float = 2.5f
     }
 }
