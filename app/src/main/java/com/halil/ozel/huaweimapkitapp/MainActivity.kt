@@ -17,9 +17,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setView()
 
         var mapViewBundle: Bundle? = null
         if (savedInstanceState != null) {
@@ -33,6 +31,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    private fun setView() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+    }
 
     // If the map is ready
     override fun onMapReady(map: HuaweiMap) {
