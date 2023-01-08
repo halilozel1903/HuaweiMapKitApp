@@ -58,7 +58,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             .tilt(TILT).build()
         cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
         huaweiMap.moveCamera(cameraUpdate)
-
     }
 
     companion object {
