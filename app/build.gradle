@@ -9,6 +9,7 @@ android {
     defaultConfig {
         applicationId "com.halil.ozel.huaweimapkitapp"
         minSdkVersion 24
+        //noinspection EditedTargetSdkVersion
         targetSdkVersion 34
         versionCode 1
         versionName "1.0"
