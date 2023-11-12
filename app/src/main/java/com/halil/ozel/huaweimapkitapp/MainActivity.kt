@@ -20,9 +20,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         setView()
 
         var mapViewBundle: Bundle? = null
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAP_BUNDLE_KEY)
-        }
+        savedInstanceState?.getBundle(MAP_BUNDLE_KEY)?.also { mapViewBundle = it }
 
         binding.huaweiMapView.apply {
             onCreate(mapViewBundle)
