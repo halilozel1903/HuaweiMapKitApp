@@ -61,16 +61,16 @@ https://id5.cloud.huawei.com/CAS/portal/userRegister/regbyemail.html
 
 ```kotlin
 buildscript {
-    ext.kotlin_version = "1.6.21"
+    ext.kotlin_version = "2.4.20"
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://developer.huawei.com/repo/' }
+        maven { url = 'https://developer.huawei.com/repo/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
+        classpath 'com.android.tools.build:gradle:9.4.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.huawei.agconnect:agcp:1.6.0.300'
+        classpath 'com.huawei.agconnect:agcp:1.9.6.300'
     }
 }
 
@@ -79,13 +79,13 @@ allprojects {
         google()
         mavenCentral()
         maven {
-            url 'https://developer.huawei.com/repo/'
+            url = 'https://developer.huawei.com/repo/'
         }
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+tasks.register('clean', Delete) {
+    delete rootProject.layout.buildDirectory
 }
 ```
 <br>
@@ -95,7 +95,6 @@ task clean(type: Delete) {
 ```kotlin
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
     id 'com.huawei.agconnect'
 }
 ```
@@ -105,11 +104,11 @@ plugins {
 
 ```kotlin
 dependencies {
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.huawei.hms:maps:6.4.1.300'
+    implementation 'androidx.core:core-ktx:1.19.1'
+    implementation 'androidx.appcompat:appcompat:1.8.0'
+    implementation 'com.google.android.material:material:1.14.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
+    implementation 'com.huawei.hms:maps:6.15.1.324'
 }
 ```
 <br>
