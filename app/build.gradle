@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdk 37
     defaultConfig {
         applicationId "com.halil.ozel.huaweimapkitapp"
-        minSdkVersion 24
+        minSdk 24
         //noinspection EditedTargetSdkVersion
-        targetSdkVersion 34
+        targetSdk 37
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
