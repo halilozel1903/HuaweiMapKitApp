@@ -1,16 +1,15 @@
 plugins {
     id 'com.android.application'
-    id 'kotlin-android'
     id 'com.huawei.agconnect'
 }
 
 android {
-    compileSdkVersion 34
+    compileSdk 37
     defaultConfig {
         applicationId "com.halil.ozel.huaweimapkitapp"
-        minSdkVersion 24
+        minSdk 24
         //noinspection EditedTargetSdkVersion
-        targetSdkVersion 34
+        targetSdk 37
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -26,7 +25,7 @@ android {
             keyAlias "huawei"
             // Key password.
             keyPassword "huawei"
-            v2SigningEnabled true
+            v2SigningEnabled = true
         }
     }
 
@@ -35,29 +34,26 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
         }
         debug {
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
-    namespace 'com.halil.ozel.huaweimapkitapp'
+    namespace = 'com.halil.ozel.huaweimapkitapp'
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.10.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.huawei.hms:maps:6.4.1.300'
+    implementation 'androidx.core:core-ktx:1.19.1'
+    implementation 'androidx.appcompat:appcompat:1.8.0'
+    implementation 'com.google.android.material:material:1.14.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.2'
+    implementation 'com.huawei.hms:maps:6.15.1.324'
 }
