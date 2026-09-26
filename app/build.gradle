@@ -26,7 +26,7 @@ android {
             keyAlias "huawei"
             // Key password.
             keyPassword "huawei"
-            v2SigningEnabled true
+            v2SigningEnabled = true
         }
     }
 
@@ -35,10 +35,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
         }
         debug {
-            signingConfig signingConfigs.release
+            signingConfig = signingConfigs.release
         }
     }
     compileOptions {
@@ -49,9 +49,9 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-        viewBinding true
+        viewBinding = true
     }
-    namespace 'com.halil.ozel.huaweimapkitapp'
+    namespace = 'com.halil.ozel.huaweimapkitapp'
 }
 
 dependencies {
