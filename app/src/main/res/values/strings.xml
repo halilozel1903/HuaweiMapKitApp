@@ -5,4 +5,8 @@
     <string name="stop_kadikoy">Kadıköy</string>
     <string name="snippet_office">Sample office</string>
     <string name="snippet_stop">Route stop</string>
+    <string name="map_type_normal">Normal</string>
+    <string name="map_type_satellite">Satellite</string>
+    <string name="map_type_terrain">Terrain</string>
+    <string name="map_type_button">Map: %1$s</string>
 </resources>

@@ -10,4 +10,5 @@
     <color name="route_stroke">#FF6200EE</color>
     <color name="circle_stroke">#FF018786</color>
     <color name="circle_fill">#33018786</color>
+    <color name="control_bar">#F2FFFFFF</color>
 </resources>

@@ -83,6 +83,25 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        binding.mapTypeButton.text = getString(
+            R.string.map_type_button,
+            getString(R.string.map_type_normal),
+        )
+        binding.mapTypeButton.setOnClickListener { showNextMapType() }
+    }
+
+    private fun showNextMapType() {
+        if (!::huaweiMap.isInitialized) return
+        val index = MAP_TYPES.indexOf(huaweiMap.mapType).let { if (it < 0) 0 else it }
+        val next = MAP_TYPES[(index + 1) % MAP_TYPES.size]
+        huaweiMap.mapType = next
+        binding.mapTypeButton.text = getString(R.string.map_type_button, mapTypeLabel(next))
+    }
+
+    private fun mapTypeLabel(type: Int): String = when (type) {
+        HuaweiMap.MAP_TYPE_SATELLITE -> getString(R.string.map_type_satellite)
+        HuaweiMap.MAP_TYPE_TERRAIN -> getString(R.string.map_type_terrain)
+        else -> getString(R.string.map_type_normal)
     }
 
     // If the map is ready
@@ -136,6 +155,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             .tilt(TILT).build()
         cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
         huaweiMap.moveCamera(cameraUpdate)
+        binding.mapControls.post {
+            huaweiMap.setPadding(0, 0, 0, binding.mapControls.height)
+        }
     }
 
     companion object {
@@ -151,5 +173,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         private const val CIRCLE_RADIUS_METERS = 800.0
         private const val ROUTE_WIDTH = 12f
         private const val CIRCLE_STROKE_WIDTH = 4f
+        private val MAP_TYPES = intArrayOf(
+            HuaweiMap.MAP_TYPE_NORMAL,
+            HuaweiMap.MAP_TYPE_SATELLITE,
+            HuaweiMap.MAP_TYPE_TERRAIN,
+        )
     }
 }
