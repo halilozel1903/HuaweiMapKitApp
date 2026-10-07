@@ -192,18 +192,31 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 ```
 - Have done all the necessary actions. Congratulations! 🥳 You have developed the first Huawei Maps application.
 
+## Map controls 🗺️
+
+The sample opens on Huawei Turkey, then draws the rest of the Map Kit scene:
+
+- Markers for Huawei Turkey, Üsküdar, and Kadıköy. Tap a marker to open its title and move the camera there.
+- A geodesic polyline through those three stops, and an 800 meter circle around the office.
+- **Map** cycles Normal, Satellite, and Terrain.
+- **Traffic** turns the traffic layer on or off.
+- **Fit route** frames the three stops. **Reset camera** returns to the original zoom, bearing, and tilt.
+- **My location** asks for location permission, turns on the my-location layer, and moves the camera to the device position.
+
 ## Command line ⌨️
 
-The `cli` module is a small JVM tool for the same map sample. It prints the Huawei Turkey marker and camera, checks Map Kit camera values, and measures the great-circle distance between two WGS 84 points.
+The `cli` module is a small JVM tool for the same map sample. It prints the Huawei Turkey marker and camera, checks Map Kit camera values, measures distance, and reports the sample route length and circle area.
 
 ```bash
 ./gradlew :cli:run --args="sample"
 ./gradlew :cli:run --args="camera --lat 41.031261 --lng 29.117277 --zoom 10 --bearing 2 --tilt 2.5"
 ./gradlew :cli:run --args="distance 41.031261 29.117277 41.0082 28.9784"
+./gradlew :cli:run --args="route"
+./gradlew :cli:run --args="circle"
 ./gradlew :cli:test
 ```
 
-`camera` uses the sample camera for any option you leave out. Latitude must be between -90 and 90, longitude between -180 and 180, zoom between 0 and 20, bearing between 0 and 360, and tilt between 0 and 75.
+`camera` uses the sample camera for any option you leave out. Latitude must be between -90 and 90, longitude between -180 and 180, zoom between 0 and 20, bearing between 0 and 360, and tilt between 0 and 75. `route` with no arguments uses Huawei Turkey, Üsküdar, and Kadıköy. `circle` defaults to the 800 meter circle around the office.
 
 ## Screenshots 📱
 

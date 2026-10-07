@@ -58,4 +58,34 @@ class MapKitCliTest {
         }
         assertEquals(2, error.exitCode)
     }
+
+    @Test
+    fun sampleRouteLengthIsTheSumOfItsLegs() {
+        val points = SampleMap.route.map { it.position }
+        val expected = MapMath.distanceMeters(points[0], points[1]) +
+            MapMath.distanceMeters(points[1], points[2])
+        assertEquals(expected, MapMath.routeLengthMeters(points), 0.001)
+        val output = execute(listOf("route"))
+        assertTrue(output.contains("Huawei Turkey"))
+        assertTrue(output.contains("Üsküdar"))
+        assertTrue(output.contains("Kadıköy"))
+        assertTrue(output.contains("legs: 2"))
+    }
+
+    @Test
+    fun circleAreaUsesTheSampleRadius() {
+        val area = MapMath.circleAreaSquareMeters(SampleMap.CIRCLE_RADIUS_METERS)
+        assertEquals(Math.PI * 800.0 * 800.0, area, 0.001)
+        val output = execute(listOf("circle"))
+        assertTrue(output.contains("radiusMeters: 800"))
+        assertTrue(output.contains("41.031261"))
+    }
+
+    @Test
+    fun circleRejectsANegativeRadius() {
+        val error = assertFailsWith<CliException> {
+            execute(listOf("circle", "--radius", "-10"))
+        }
+        assertEquals(2, error.exitCode)
+    }
 }

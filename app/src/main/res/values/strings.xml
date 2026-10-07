@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">HuaweiMapKitApp</string>
     <string name="location_name">Huawei Turkey</string>
+    <string name="stop_uskudar">Üsküdar</string>
+    <string name="stop_kadikoy">Kadıköy</string>
+    <string name="snippet_office">Sample office</string>
+    <string name="snippet_stop">Route stop</string>
+    <string name="map_type_normal">Normal</string>
+    <string name="map_type_satellite">Satellite</string>
+    <string name="map_type_terrain">Terrain</string>
+    <string name="map_type_button">Map: %1$s</string>
+    <string name="traffic_on">Traffic: on</string>
+    <string name="traffic_off">Traffic: off</string>
+    <string name="action_fit_route">Fit route</string>
+    <string name="action_reset_camera">Reset camera</string>
+    <string name="action_my_location">My location</string>
+    <string name="location_permission_denied">Location permission is required to show your position.</string>
+    <string name="location_unavailable">Location is turned off.</string>
 </resources>
