@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">HuaweiMapKitApp</string>
     <string name="location_name">Huawei Turkey</string>
+    <string name="stop_uskudar">Üsküdar</string>
+    <string name="stop_kadikoy">Kadıköy</string>
+    <string name="snippet_office">Sample office</string>
+    <string name="snippet_stop">Route stop</string>
 </resources>

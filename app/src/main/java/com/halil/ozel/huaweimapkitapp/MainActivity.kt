@@ -2,6 +2,7 @@ package com.halil.ozel.huaweimapkitapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.halil.ozel.huaweimapkitapp.databinding.ActivityMainBinding
 import com.huawei.hms.maps.*
 import com.huawei.hms.maps.model.*
@@ -68,6 +69,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.huaweiMapView.onLowMemory()
     }
 
+    private fun addStopMarker(position: LatLng, title: String, snippet: String, hue: Float): Marker {
+        return huaweiMap.addMarker(
+            MarkerOptions()
+                .icon(BitmapDescriptorFactory.defaultMarker(hue))
+                .title(title)
+                .snippet(snippet)
+                .position(position),
+        )
+    }
+
     private fun setView() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
@@ -80,14 +91,43 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         // Mapping
         huaweiMap = map
 
-        // Marker add
-        marker = huaweiMap.addMarker(
-            MarkerOptions()
-                .icon(BitmapDescriptorFactory.defaultMarker()) // Default marker icon
-                .title(getString(R.string.location_name)) // Marker title
-                .position(LatLng(LATITUDE, LONGITUDE)) // Marker position
-
+        marker = addStopMarker(
+            position = OFFICE,
+            title = getString(R.string.location_name),
+            snippet = getString(R.string.snippet_office),
+            hue = BitmapDescriptorFactory.HUE_RED,
         )
+        addStopMarker(
+            position = USKUDAR,
+            title = getString(R.string.stop_uskudar),
+            snippet = getString(R.string.snippet_stop),
+            hue = BitmapDescriptorFactory.HUE_AZURE,
+        )
+        addStopMarker(
+            position = KADIKOY,
+            title = getString(R.string.stop_kadikoy),
+            snippet = getString(R.string.snippet_stop),
+            hue = BitmapDescriptorFactory.HUE_ORANGE,
+        )
+        huaweiMap.addPolyline(
+            PolylineOptions()
+                .add(OFFICE, USKUDAR, KADIKOY)
+                .color(ContextCompat.getColor(this, R.color.route_stroke))
+                .width(ROUTE_WIDTH)
+                .geodesic(true),
+        )
+        huaweiMap.addCircle(
+            CircleOptions()
+                .center(OFFICE)
+                .radius(CIRCLE_RADIUS_METERS)
+                .strokeColor(ContextCompat.getColor(this, R.color.circle_stroke))
+                .fillColor(ContextCompat.getColor(this, R.color.circle_fill))
+                .strokeWidth(CIRCLE_STROKE_WIDTH),
+        )
+        huaweiMap.setOnMarkerClickListener { clicked ->
+            huaweiMap.animateCamera(CameraUpdateFactory.newLatLng(clicked.position))
+            false
+        }
         // Camera position settings
         cameraPosition = CameraPosition.builder()
             .target(LatLng(LATITUDE, LONGITUDE))
@@ -105,5 +145,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         private const val ZOOM: Float = 10f
         private const val BEARING: Float = 2.0f
         private const val TILT: Float = 2.5f
+        private val OFFICE = LatLng(LATITUDE, LONGITUDE)
+        private val USKUDAR = LatLng(41.0267, 29.0158)
+        private val KADIKOY = LatLng(40.9927, 29.0233)
+        private const val CIRCLE_RADIUS_METERS = 800.0
+        private const val ROUTE_WIDTH = 12f
+        private const val CIRCLE_STROKE_WIDTH = 4f
     }
 }

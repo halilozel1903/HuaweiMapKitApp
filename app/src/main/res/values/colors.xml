@@ -7,4 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="route_stroke">#FF6200EE</color>
+    <color name="circle_stroke">#FF018786</color>
+    <color name="circle_fill">#33018786</color>
 </resources>
