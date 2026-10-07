@@ -89,7 +89,31 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         )
         binding.mapTypeButton.setOnClickListener { showNextMapType() }
         binding.trafficButton.setOnClickListener { toggleTraffic() }
+        binding.fitRouteButton.setOnClickListener { fitRoute() }
+        binding.resetCameraButton.setOnClickListener { resetCamera() }
     }
+
+    private fun fitRoute() {
+        if (!::huaweiMap.isInitialized) return
+        val bounds = LatLngBounds.builder()
+            .include(OFFICE)
+            .include(USKUDAR)
+            .include(KADIKOY)
+            .build()
+        huaweiMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, ROUTE_PADDING))
+    }
+
+    private fun resetCamera() {
+        if (!::huaweiMap.isInitialized) return
+        huaweiMap.animateCamera(CameraUpdateFactory.newCameraPosition(sampleCamera()))
+    }
+
+    private fun sampleCamera(): CameraPosition = CameraPosition.builder()
+        .target(OFFICE)
+        .zoom(ZOOM)
+        .bearing(BEARING)
+        .tilt(TILT)
+        .build()
 
     private fun toggleTraffic() {
         if (!::huaweiMap.isInitialized) return
@@ -156,11 +180,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             false
         }
         // Camera position settings
-        cameraPosition = CameraPosition.builder()
-            .target(LatLng(LATITUDE, LONGITUDE))
-            .zoom(ZOOM)
-            .bearing(BEARING)
-            .tilt(TILT).build()
+        cameraPosition = sampleCamera()
         cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
         huaweiMap.moveCamera(cameraUpdate)
         binding.mapControls.post {
@@ -181,6 +201,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         private const val CIRCLE_RADIUS_METERS = 800.0
         private const val ROUTE_WIDTH = 12f
         private const val CIRCLE_STROKE_WIDTH = 4f
+        private const val ROUTE_PADDING = 120
         private val MAP_TYPES = intArrayOf(
             HuaweiMap.MAP_TYPE_NORMAL,
             HuaweiMap.MAP_TYPE_SATELLITE,

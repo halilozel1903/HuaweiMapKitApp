@@ -11,4 +11,6 @@
     <string name="map_type_button">Map: %1$s</string>
     <string name="traffic_on">Traffic: on</string>
     <string name="traffic_off">Traffic: off</string>
+    <string name="action_fit_route">Fit route</string>
+    <string name="action_reset_camera">Reset camera</string>
 </resources>

@@ -47,6 +47,22 @@
                 android:layout_marginStart="8dp"
                 android:text="@string/traffic_off" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/fitRouteButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/action_fit_route" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/resetCameraButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/action_reset_camera" />
+
         </LinearLayout>
     </HorizontalScrollView>
 
