@@ -39,6 +39,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/map_type_button" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/trafficButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/traffic_off" />
+
         </LinearLayout>
     </HorizontalScrollView>
 

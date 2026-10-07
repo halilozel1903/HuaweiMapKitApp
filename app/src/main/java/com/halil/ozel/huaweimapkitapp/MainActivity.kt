@@ -88,6 +88,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             getString(R.string.map_type_normal),
         )
         binding.mapTypeButton.setOnClickListener { showNextMapType() }
+        binding.trafficButton.setOnClickListener { toggleTraffic() }
+    }
+
+    private fun toggleTraffic() {
+        if (!::huaweiMap.isInitialized) return
+        val enabled = !huaweiMap.isTrafficEnabled
+        huaweiMap.isTrafficEnabled = enabled
+        binding.trafficButton.setText(if (enabled) R.string.traffic_on else R.string.traffic_off)
     }
 
     private fun showNextMapType() {

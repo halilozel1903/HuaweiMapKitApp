@@ -9,4 +9,6 @@
     <string name="map_type_satellite">Satellite</string>
     <string name="map_type_terrain">Terrain</string>
     <string name="map_type_button">Map: %1$s</string>
+    <string name="traffic_on">Traffic: on</string>
+    <string name="traffic_off">Traffic: off</string>
 </resources>
