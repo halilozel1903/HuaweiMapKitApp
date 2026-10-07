@@ -192,6 +192,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 ```
 - Have done all the necessary actions. Congratulations! 🥳 You have developed the first Huawei Maps application.
 
+## Command line ⌨️
+
+The `cli` module is a small JVM tool for the same map sample. It prints the Huawei Turkey marker and camera, checks Map Kit camera values, and measures the great-circle distance between two WGS 84 points.
+
+```bash
+./gradlew :cli:run --args="sample"
+./gradlew :cli:run --args="camera --lat 41.031261 --lng 29.117277 --zoom 10 --bearing 2 --tilt 2.5"
+./gradlew :cli:run --args="distance 41.031261 29.117277 41.0082 28.9784"
+./gradlew :cli:test
+```
+
+`camera` uses the sample camera for any option you leave out. Latitude must be between -90 and 90, longitude between -180 and 180, zoom between 0 and 20, bearing between 0 and 360, and tilt between 0 and 75.
+
 ## Screenshots 📱
 
 <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen1.png" width="300" /> <img src="https://github.com/halilozel1903/HuaweiMapKitApp/blob/master/photos/huaweiMapKitScreen2.png" width="300" />
