@@ -15,4 +15,5 @@
     <string name="action_reset_camera">Reset camera</string>
     <string name="action_my_location">My location</string>
     <string name="location_permission_denied">Location permission is required to show your position.</string>
+    <string name="location_unavailable">Location is turned off.</string>
 </resources>

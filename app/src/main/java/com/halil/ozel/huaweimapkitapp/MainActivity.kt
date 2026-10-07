@@ -2,7 +2,11 @@ package com.halil.ozel.huaweimapkitapp
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +23,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var cameraUpdate: CameraUpdate
     private lateinit var cameraPosition: CameraPosition
     private lateinit var binding: ActivityMainBinding
-    private var moveToMyLocation = false
+    private val locationManager by lazy { getSystemService(LocationManager::class.java) }
+    private var deviceLocationListener: LocationListener? = null
 
     private val locationPermissionRequest = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions(),
@@ -67,6 +72,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onDestroy() {
+        deviceLocationListener?.let { listener ->
+            if (hasLocationPermission()) {
+                locationManager.removeUpdates(listener)
+            }
+        }
         binding.huaweiMapView.onDestroy()
         super.onDestroy()
     }
@@ -129,11 +139,26 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         try {
             huaweiMap.isMyLocationEnabled = true
             huaweiMap.uiSettings.isMyLocationButtonEnabled = true
-            if (!moveCamera) return
-            val location = huaweiMap.myLocation
-            if (location == null) {
-                moveToMyLocation = true
-            } else {
+            if (moveCamera) {
+                moveCameraToDeviceLocation()
+            }
+        } catch (_: SecurityException) {
+            Toast.makeText(this, R.string.location_permission_denied, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun moveCameraToDeviceLocation() {
+        val provider = locationProvider() ?: run {
+            Toast.makeText(this, R.string.location_unavailable, Toast.LENGTH_SHORT).show()
+            return
+        }
+        val listener = object : LocationListener {
+            override fun onLocationChanged(location: Location) {
+                deviceLocationListener = null
+                if (hasLocationPermission()) {
+                    locationManager.removeUpdates(this)
+                }
+                if (!::huaweiMap.isInitialized) return
                 huaweiMap.animateCamera(
                     CameraUpdateFactory.newLatLngZoom(
                         LatLng(location.latitude, location.longitude),
@@ -141,9 +166,24 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
                     ),
                 )
             }
+        }
+        try {
+            val last = locationManager.getLastKnownLocation(provider)
+            if (last != null) {
+                listener.onLocationChanged(last)
+            } else {
+                deviceLocationListener = listener
+                locationManager.requestLocationUpdates(provider, 0L, 0f, listener, Looper.getMainLooper())
+            }
         } catch (_: SecurityException) {
             Toast.makeText(this, R.string.location_permission_denied, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun locationProvider(): String? = when {
+        locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) -> LocationManager.GPS_PROVIDER
+        locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) -> LocationManager.NETWORK_PROVIDER
+        else -> null
     }
 
     private fun hasLocationPermission(): Boolean {
@@ -237,16 +277,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         huaweiMap.setOnMarkerClickListener { clicked ->
             huaweiMap.animateCamera(CameraUpdateFactory.newLatLng(clicked.position))
             false
-        }
-        huaweiMap.setOnMyLocationChangeListener { location ->
-            if (!moveToMyLocation) return@setOnMyLocationChangeListener
-            moveToMyLocation = false
-            huaweiMap.animateCamera(
-                CameraUpdateFactory.newLatLngZoom(
-                    LatLng(location.latitude, location.longitude),
-                    MY_LOCATION_ZOOM,
-                ),
-            )
         }
         if (hasLocationPermission()) {
             enableMyLocation(moveCamera = false)
