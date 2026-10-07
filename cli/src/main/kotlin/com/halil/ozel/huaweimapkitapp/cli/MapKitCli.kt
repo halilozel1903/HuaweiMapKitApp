@@ -146,21 +146,22 @@ private fun parseRoute(args: List<String>): List<RouteStop> {
 }
 
 private fun formatRoute(stops: List<RouteStop>): String {
-    val lines = stops.joinToString("\n") { stop ->
-        "  ${stop.title}: ${formatCoordinate(stop.position.latitude)}, ${formatCoordinate(stop.position.longitude)}"
-    }
     val meters = try {
         MapMath.routeLengthMeters(stops.map { it.position })
     } catch (error: IllegalArgumentException) {
         throw CliException(2, error.message ?: "Invalid route")
     }
-    return """
-        Route
-        $lines
-          legs: ${stops.size - 1}
-          meters: ${formatDecimal(meters, 1)}
-          kilometers: ${formatDecimal(meters / 1000.0, 3)}
-    """.trimIndent()
+    return buildString {
+        appendLine("Route")
+        stops.forEach { stop ->
+            appendLine(
+                "  ${stop.title}: ${formatCoordinate(stop.position.latitude)}, ${formatCoordinate(stop.position.longitude)}",
+            )
+        }
+        appendLine("  legs: ${stops.size - 1}")
+        appendLine("  meters: ${formatDecimal(meters, 1)}")
+        append("  kilometers: ${formatDecimal(meters / 1000.0, 3)}")
+    }
 }
 
 private fun parseCircle(args: List<String>): Pair<LatLng, Double> {
