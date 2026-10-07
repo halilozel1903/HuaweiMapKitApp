@@ -28,6 +28,46 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.huaweiMapView.onStart()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.huaweiMapView.onResume()
+    }
+
+    override fun onPause() {
+        binding.huaweiMapView.onPause()
+        super.onPause()
+    }
+
+    override fun onStop() {
+        binding.huaweiMapView.onStop()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        binding.huaweiMapView.onDestroy()
+        super.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        var mapViewBundle = outState.getBundle(MAP_BUNDLE_KEY)
+        if (mapViewBundle == null) {
+            mapViewBundle = Bundle()
+            outState.putBundle(MAP_BUNDLE_KEY, mapViewBundle)
+        }
+        binding.huaweiMapView.onSaveInstanceState(mapViewBundle)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.huaweiMapView.onLowMemory()
+    }
+
     private fun setView() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
