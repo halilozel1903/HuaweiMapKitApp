@@ -63,6 +63,14 @@
                 android:layout_marginStart="8dp"
                 android:text="@string/action_reset_camera" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/myLocationButton"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/action_my_location" />
+
         </LinearLayout>
     </HorizontalScrollView>
 

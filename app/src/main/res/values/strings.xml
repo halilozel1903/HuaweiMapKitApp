@@ -13,4 +13,6 @@
     <string name="traffic_off">Traffic: off</string>
     <string name="action_fit_route">Fit route</string>
     <string name="action_reset_camera">Reset camera</string>
+    <string name="action_my_location">My location</string>
+    <string name="location_permission_denied">Location permission is required to show your position.</string>
 </resources>

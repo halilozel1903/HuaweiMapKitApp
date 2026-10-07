@@ -1,6 +1,10 @@
 package com.halil.ozel.huaweimapkitapp
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.halil.ozel.huaweimapkitapp.databinding.ActivityMainBinding
@@ -15,6 +19,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var cameraUpdate: CameraUpdate
     private lateinit var cameraPosition: CameraPosition
     private lateinit var binding: ActivityMainBinding
+    private var moveToMyLocation = false
+
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions(),
+    ) { grants ->
+        val granted = grants[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+            grants[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        if (granted) {
+            enableMyLocation(moveCamera = true)
+        } else {
+            Toast.makeText(this, R.string.location_permission_denied, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +108,48 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.trafficButton.setOnClickListener { toggleTraffic() }
         binding.fitRouteButton.setOnClickListener { fitRoute() }
         binding.resetCameraButton.setOnClickListener { resetCamera() }
+        binding.myLocationButton.setOnClickListener { onMyLocationClicked() }
+    }
+
+    private fun onMyLocationClicked() {
+        if (hasLocationPermission()) {
+            enableMyLocation(moveCamera = true)
+        } else {
+            locationPermissionRequest.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                ),
+            )
+        }
+    }
+
+    private fun enableMyLocation(moveCamera: Boolean) {
+        if (!::huaweiMap.isInitialized || !hasLocationPermission()) return
+        try {
+            huaweiMap.isMyLocationEnabled = true
+            huaweiMap.uiSettings.isMyLocationButtonEnabled = true
+            if (!moveCamera) return
+            val location = huaweiMap.myLocation
+            if (location == null) {
+                moveToMyLocation = true
+            } else {
+                huaweiMap.animateCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        LatLng(location.latitude, location.longitude),
+                        MY_LOCATION_ZOOM,
+                    ),
+                )
+            }
+        } catch (_: SecurityException) {
+            Toast.makeText(this, R.string.location_permission_denied, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun hasLocationPermission(): Boolean {
+        val fine = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        val coarse = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+        return fine == PackageManager.PERMISSION_GRANTED || coarse == PackageManager.PERMISSION_GRANTED
     }
 
     private fun fitRoute() {
@@ -179,6 +238,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
             huaweiMap.animateCamera(CameraUpdateFactory.newLatLng(clicked.position))
             false
         }
+        huaweiMap.setOnMyLocationChangeListener { location ->
+            if (!moveToMyLocation) return@setOnMyLocationChangeListener
+            moveToMyLocation = false
+            huaweiMap.animateCamera(
+                CameraUpdateFactory.newLatLngZoom(
+                    LatLng(location.latitude, location.longitude),
+                    MY_LOCATION_ZOOM,
+                ),
+            )
+        }
+        if (hasLocationPermission()) {
+            enableMyLocation(moveCamera = false)
+        }
         // Camera position settings
         cameraPosition = sampleCamera()
         cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
@@ -202,6 +274,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         private const val ROUTE_WIDTH = 12f
         private const val CIRCLE_STROKE_WIDTH = 4f
         private const val ROUTE_PADDING = 120
+        private const val MY_LOCATION_ZOOM = 15f
         private val MAP_TYPES = intArrayOf(
             HuaweiMap.MAP_TYPE_NORMAL,
             HuaweiMap.MAP_TYPE_SATELLITE,
