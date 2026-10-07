@@ -9,6 +9,8 @@ import kotlin.math.sqrt
 /**
  * Marker and camera used by the Android sample in MainActivity.
  */
+data class RouteStop(val title: String, val position: LatLng)
+
 object SampleMap {
     const val TITLE = "Huawei Turkey"
     const val LATITUDE = 41.031261
@@ -16,6 +18,13 @@ object SampleMap {
     const val ZOOM = 10.0
     const val BEARING = 2.0
     const val TILT = 2.5
+    const val CIRCLE_RADIUS_METERS = 800.0
+
+    val route = listOf(
+        RouteStop("Huawei Turkey", LatLng(LATITUDE, LONGITUDE)),
+        RouteStop("Üsküdar", LatLng(41.0267, 29.0158)),
+        RouteStop("Kadıköy", LatLng(40.9927, 29.0233)),
+    )
 }
 
 data class LatLng(val latitude: Double, val longitude: Double)
@@ -46,6 +55,20 @@ object MapMath {
         bearing = SampleMap.BEARING,
         tilt = SampleMap.TILT,
     )
+
+    fun routeLengthMeters(points: List<LatLng>): Double {
+        if (points.size < 2) {
+            throw IllegalArgumentException("route needs at least two points")
+        }
+        return points.zipWithNext().sumOf { (from, to) -> distanceMeters(from, to) }
+    }
+
+    fun circleAreaSquareMeters(radiusMeters: Double): Double {
+        if (radiusMeters.isNaN() || radiusMeters <= 0.0) {
+            throw IllegalArgumentException("radius must be greater than 0")
+        }
+        return Math.PI * radiusMeters * radiusMeters
+    }
 
     fun distanceMeters(from: LatLng, to: LatLng): Double {
         val lat1 = Math.toRadians(from.latitude)
